@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'KEYEI',
       theme: ThemeData(
-          textTheme: GoogleFonts.robotoCondensedTextTheme(Theme.of(context).textTheme,),
+          textTheme: GoogleFonts.openSansTextTheme(Theme.of(context).textTheme,),
           primaryColor: dark,
       ),
       initialRoute: '/init',

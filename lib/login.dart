@@ -12,7 +12,6 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
         elevation: 0,
         title: null,
@@ -47,46 +46,72 @@ class _LoginState extends State<Login> {
                       style: TextStyle(fontSize: 15),
                     ),
                     const SizedBox(
-                      height: 10,
+                      height: 5,
                     ),
                     SizedBox(
                       width: 300,
+                      height: 40,
                       child: TextFormField(
-                        // controller: _emailController,
                         enableSuggestions: false,
                         autocorrect: false,
-                        // validator: (value) {
-                        //   if (value == null || value.isEmpty) {
-                        //     return 'Please enter email';
-                        //   } else if (EmailValidator.validate(value) ==
-                        //       false) {
-                        //     return 'please enter a valid email';
-                        //   }
-                        //   return null;
-                        // },
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter your login ID';
+                          }
+                          return null;
+                        },
                         decoration: InputDecoration(
                           filled: true,
-                          fillColor: dark,
-                          hintText: "Enter your login ID",
+                          fillColor: Colors.white,
+                          hintText: "Enter login ID",
                           hintStyle: const TextStyle(
-                            fontSize: 12,
-                            color: Colors.white,
-                            fontWeight: FontWeight.w100
-                          ),
+                              fontSize: 15,
+                              color: Colors.black26,
+                              fontWeight: FontWeight.w100),
+                          contentPadding:
+                              const EdgeInsets.symmetric(vertical: 8),
                           border: OutlineInputBorder(
                             borderSide: const BorderSide(
-                              width: 0.0,
+                              width: 10.0,
                               style: BorderStyle.none,
                             ),
-                            borderRadius: BorderRadius.circular(10.0),
+                            borderRadius: BorderRadius.circular(0),
+                          ),
+                          prefixIcon: const Icon(
+                            Icons.person,
+                            color: Colors.black,
                           ),
                         ),
                       ),
                     ),
                     const SizedBox(
-                      height: 300,
+                      height: 120,
                     ),
-
+                    SizedBox(
+                      width: 300,
+                      height: 45,
+                      child: ElevatedButton(
+                        // onPressed: () => handleLogin(),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.black,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(5.0),
+                          ),
+                          shadowColor: Colors.grey.withOpacity(0.9),
+                        ),
+                        onPressed: () {},
+                        child: const Text(
+                          "LOGIN",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 15,
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 70,
+                    ),
                   ],
                 ),
               ),
