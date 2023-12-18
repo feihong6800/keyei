@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:keyei/home.dart';
 import 'package:keyei/res/colors.dart';
 
 class Login extends StatefulWidget {
@@ -99,7 +100,12 @@ class _LoginState extends State<Login> {
                           ),
                           shadowColor: Colors.grey.withOpacity(0.9),
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const Home()));
+                        },
                         child: const Text(
                           "LOGIN",
                           style: TextStyle(
@@ -110,7 +116,7 @@ class _LoginState extends State<Login> {
                       ),
                     ),
                     const SizedBox(
-                      height: 70,
+                      height: 50,
                     ),
                   ],
                 ),
