@@ -32,7 +32,7 @@ class _LoginState extends State<Login> {
               ),
               const SizedBox(height: 20),
               const Text(
-                'Welcome back to KEYEI',
+                'Welcome back to Key Insights',
                 style: TextStyle(
                     fontSize: 20, color: dark, fontWeight: FontWeight.w100),
               ),
