@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:keyei/login.dart';
+import 'package:key_insight/login.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
 Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'KEYEI',
+      title: 'Key Insight',
       theme: ThemeData(
         textTheme: GoogleFonts.openSansTextTheme(
           Theme.of(context).textTheme,

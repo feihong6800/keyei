@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:keyei/home.dart';
-import 'package:keyei/res/colors.dart';
+import 'package:key_insight/home.dart';
+import 'package:key_insight/res/colors.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -32,7 +32,7 @@ class _LoginState extends State<Login> {
               ),
               const SizedBox(height: 20),
               const Text(
-                'Welcome back to Key Insights',
+                'Welcome back!',
                 style: TextStyle(
                     fontSize: 20, color: dark, fontWeight: FontWeight.w100),
               ),
@@ -64,7 +64,7 @@ class _LoginState extends State<Login> {
                         decoration: InputDecoration(
                           filled: true,
                           fillColor: Colors.white,
-                          hintText: "Enter login ID",
+                          hintText: "Enter ID",
                           hintStyle: const TextStyle(
                               fontSize: 15,
                               color: Colors.black26,
@@ -116,7 +116,7 @@ class _LoginState extends State<Login> {
                       ),
                     ),
                     const SizedBox(
-                      height: 50,
+                      height: 40,
                     ),
                   ],
                 ),
