@@ -57,7 +57,7 @@ class _LoginState extends State<Login> {
                         autocorrect: false,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'Please enter your login ID';
+                            return 'Please enter your ID';
                           }
                           return null;
                         },
@@ -104,7 +104,7 @@ class _LoginState extends State<Login> {
                           Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const Home()));
+                                  builder: (context) => Home()));
                         },
                         child: const Text(
                           "LOGIN",

@@ -1,95 +1,43 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_database/firebase_database.dart';
-import 'package:fl_chart/fl_chart.dart'; // Make sure this import is correct
-import 'package:key_insight/res/colors.dart';
-import 'package:key_insight/view_model/home_vm.dart';
+
+import 'package:key_insight/view_model/lineChart_vm.dart';
+import 'package:key_insight/widget/line_chart_widget.dart';
+import '../model/fund_model.dart';
 
 class Home extends StatefulWidget {
-  const Home({super.key});
-
   @override
-  State<Home> createState() => _HomeState();
+  _Home createState() => _Home();
 }
 
-class _HomeState extends State<Home> {
-  final HomeVM _homeVM = HomeVM();
-  final DatabaseReference _databaseReference = FirebaseDatabase.instance.ref();
-  List<FlSpot> _dataPoints = [];
+class _Home extends State<Home> {
+  late Future<List<FundData>> futureFundData;
+  final LineChartVM lineChartVM = LineChartVM();
 
   @override
   void initState() {
     super.initState();
-    _fetchData();
-  }
-
-  void _fetchData() async {
-    DatabaseEvent event = await _databaseReference.child('fund').once();
-    Map data = event.snapshot.value as Map;
-
-    List<FlSpot> dataPoints = [];
-    data.forEach((key, value) {
-      double x = double.parse(key.toString());
-      double y = double.parse(value.toString());
-      dataPoints.add(FlSpot(x, y));
-    });
-
-    setState(() {
-      _dataPoints = dataPoints;
-    });
+    futureFundData = lineChartVM.fetchFundData();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        elevation: 0,
-        title: const Text(
-          'Home',
-          style: TextStyle(color: Colors.white),
-        ),
-        centerTitle: true,
-        backgroundColor: dark,
+        title: const Text('Line Chart'),
       ),
-      body: Container(
-        margin: const EdgeInsets.all(15.0),
-        child: Column(
-          children: [
-            const Text(
-              'Line Chart',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 20),
-            Expanded(
-              child: _dataPoints.isEmpty
-                  ? const Center(child: CircularProgressIndicator())
-                  : LineChart(
-                LineChartData(
-                  borderData: FlBorderData(show: false),
-                  titlesData: FlTitlesData(
-                    bottomTitles: SideTitles(
-                      showTitles: true,
-
-                      // Customize other properties as needed
-                    ),
-                    leftTitles: SideTitles(
-                      showTitles: true,
-                      // Customize other properties as needed
-                    ),
-                  ),
-                  lineBarsData: [
-                    LineChartBarData(
-                      spots: _dataPoints,
-                      isCurved: true,
-                      colors: [Colors.blue],
-                      barWidth: 4,
-                      belowBarData: BarAreaData(show: false),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ],
-        ),
+      body: FutureBuilder<List<FundData>>(
+        future: futureFundData,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            return Center(child: Text('Error: ${snapshot.error}'));
+          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+            return const Center(child: Text('No Data Found'));
+          } else {
+            return LineChartWidget(fundData: snapshot.data!);
+          }
+        },
       ),
     );
   }
